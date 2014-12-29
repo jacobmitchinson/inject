@@ -1,8 +1,8 @@
 class Array 
 
-  def jake_inject(argument = false, symbol = false, &block)
+  def jake_inject(argument = false, symbol = false)
     copy = self.dup 
-    symbol ? jake_inject(symbol.to_proc) : false
+    return jake_inject(argument, &symbol) if symbol
     argument ? memo = argument : memo = copy[0] && copy.delete_at(0)
     copy.each { |item| memo = yield memo, item }
     return memo
